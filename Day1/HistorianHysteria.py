@@ -17,7 +17,7 @@ class HistorianHysteria:
 list1 = []
 list2 = []
 
-with open("input_list.txt", "r") as file:
+with open("location_ids.txt", "r") as file:
     for line in file:
         num1, num2 = map(int, line.split())
         list1.append(num1)
