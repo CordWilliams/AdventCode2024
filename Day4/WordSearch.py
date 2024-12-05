@@ -7,7 +7,7 @@ def read_input():
 
     return np.array([list(line) for line in input_text.splitlines()])
 
-def count_word_occurrences(grid):
+def count_xmas(grid):
     pattern = re.compile("XMAS")
     rev_pattern = re.compile("SAMX")
     count = 0
@@ -44,8 +44,31 @@ def count_word_occurrences(grid):
         count += len(pattern.findall("".join(line)))
         count += len(rev_pattern.findall("".join(line)))
 
+    return count
 
+def count_x_mas(grid):
+    rows, cols = grid.shape
+    count = 0
+    for i in range(1, rows - 1):
+        for j in range(1, cols - 1):
+
+            top_left = grid[i - 1, j - 1]
+            bottom_right = grid[i + 1, j + 1]
+            top_right = grid[i - 1, j + 1]
+            bottom_left = grid[i + 1, j - 1]
+            center = grid[i, j]
+
+            if center == "A":
+                if (top_left == "M" and bottom_right == "S" and top_right == "S" and bottom_left == "M"):
+                    count += 1
+                elif (top_left == "S" and bottom_right == "M" and top_right == "S" and bottom_left == "M"):
+                    count += 1
+                elif (top_left == "S" and bottom_right == "M" and top_right == "M" and bottom_left == "S"):
+                    count += 1
+                elif (top_left == "M" and bottom_right == "S" and top_right == "M" and bottom_left == "S"):
+                    count += 1
     return count
 
 xmas_word_puzzle = read_input()
-print(count_word_occurrences(grid=xmas_word_puzzle))
+print(count_xmas(grid=xmas_word_puzzle))
+print(count_x_mas(grid=xmas_word_puzzle))
